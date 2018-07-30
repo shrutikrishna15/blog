@@ -21,6 +21,7 @@ urlpatterns = [
 
     url(r'^$',views.login_redirect, name='login_redirect'),
     url(r'^admin/', admin.site.urls),
-    url(r'^accounts/',include('accounts.urls'))
+    url(r'^accounts/',include('accounts.urls')),
+    url(r'^home/', include('home.urls')),
 
 ]
