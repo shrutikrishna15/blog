@@ -34,10 +34,8 @@ def register(request):
 
 
 
-
-
 from django.shortcuts import render, redirect
-
+from django.urls import reverse
 
 from accounts.forms import (
     RegistrationForm,
@@ -48,6 +46,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+
+
 
 
 
@@ -66,9 +66,13 @@ def register(request):
     return render(request, 'accounts/reg_form.html', args)
 
 @login_required
-def view_profile(request):
+def view_profile(request, pk= None):
+    if pk:
+        user = User.objects.get(pk=pk)
+    else:
+        user = request.user
 
-    args = {'user': request.user}
+    args = {'user':user}
     return render(request, 'accounts/profile.html', args)
 
 @login_required
